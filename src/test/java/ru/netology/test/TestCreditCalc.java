@@ -12,11 +12,14 @@ public class TestCreditCalc {
     public void testCreditCalc() {
         CreditCalc creditCalc = new CreditCalc();
 
-        double sum = ThreadLocalRandom.current().nextDouble();
-        double percent = ThreadLocalRandom.current().nextDouble();
-        double months = ThreadLocalRandom.current().nextDouble();
+        double sum = Math.ceil(ThreadLocalRandom.current().nextDouble(1000, 100000));
+        double percent = Math.ceil(ThreadLocalRandom.current().nextDouble(5, 50));
+        double months = Math.ceil(ThreadLocalRandom.current().nextDouble(6, 60));
 
-        creditCalc.paymentOfMonth(sum, percent, months);
-        Assertions.assertNotNull(creditCalc);
+        double payment = creditCalc.paymentOfMonth(sum, percent, months);
+        double totalAmount = creditCalc.totalAmount(payment, months);
+        double overpayment = creditCalc.overpayment(totalAmount, sum);
+        System.out.println(totalAmount + ">" + sum);
+        Assertions.assertTrue(totalAmount > sum);
     }
 }
