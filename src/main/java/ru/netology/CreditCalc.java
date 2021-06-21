@@ -6,14 +6,19 @@ public class CreditCalc {
     private double interestRate;
 
     public double paymentOfMonth(double sumOfCredit, double interestRate, double amountOfMonths) {
-        return 0;
+        double rate = (interestRate / 100) / 12;
+        double payment = sumOfCredit * ((rate * (Math.pow(1 + rate, amountOfMonths)))
+                / (Math.pow(1 + rate, amountOfMonths) - 1));
+        return Math.ceil(payment);
     }
 
     public double totalAmount(double payment, double amountOfMonths) {
-        return 0;
+        double totalAmount = payment * amountOfMonths;
+        return Math.ceil(totalAmount);
     }
 
     public double overpayment(double totalAmount, double sumOfCredit) {
-        return 0;
+        double overpayment = totalAmount - sumOfCredit;
+        return Math.ceil(overpayment);
     }
 }
